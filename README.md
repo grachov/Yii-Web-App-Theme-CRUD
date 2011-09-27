@@ -1,0 +1,1 @@
+This extension is the alternative version of available in Gii [CRUD Generator](http://www.yiiframework.com/doc/guide/1.1/en/topics.gii). It uses CSS and markup from [Web App Theme](https://github.com/pilu/web-app-theme "Web App Theme").
