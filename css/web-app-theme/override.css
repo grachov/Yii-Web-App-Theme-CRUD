@@ -1,0 +1,8 @@
+th.button-column, td.button-column {
+    width: 80px;
+    text-align: right;
+}
+
+.form select.select_field {
+    width: 100%;
+}
