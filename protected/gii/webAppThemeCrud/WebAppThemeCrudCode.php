@@ -3,9 +3,6 @@ Yii::import('system.gii.generators.crud.CrudCode');
 
 class WebAppThemeCrudCode extends CrudCode
 {
-	public $model;
-	public $controller;
-	public $baseControllerClass = 'Controller';
 	public $generateComponents = true;
 	public $generateLayouts = true;
 	public $layoutPrefix = '';
@@ -14,24 +11,16 @@ class WebAppThemeCrudCode extends CrudCode
 	public function rules()
 	{
 		return array_merge(parent::rules(), array(
-			array('model, controller, layoutPrefix', 'filter', 'filter' => 'trim'),
-			array('model, controller, baseControllerClass, theme', 'required'),
-			array('model', 'match', 'pattern' => '/^\w+[\w+\\.]*$/', 'message' => '{attribute} should only contain word characters and dots.'),
-			array('controller', 'match', 'pattern' => '/^\w+[\w+\\/]*$/', 'message' => '{attribute} should only contain word characters and slashes.'),
-			array('baseControllerClass', 'match', 'pattern' => '/^[a-zA-Z_]\w*$/', 'message' => '{attribute} should only contain word characters.'),
-			array('baseControllerClass', 'validateReservedWord', 'skipOnError' => true),
-			array('theme', 'in', 'range' => array_keys($this->getThemes())),
-			array('model', 'validateModel'),
-			array('baseControllerClass, generateComponents, generateLayouts, layoutPrefix, theme', 'sticky'),
+			array('layoutPrefix', 'filter', 'filter' => 'trim'),
+			array('theme', 'required'),
+			array('theme', 'in', 'range' => array_keys($this->getThemes()), 'message' => 'Selected theme doesn\'t exists.'),
+			array('generateComponents, generateLayouts, layoutPrefix, theme', 'sticky'),
 		));
 	}
 
 	public function attributeLabels()
 	{
 		return array_merge(parent::attributeLabels(), array(
-			'model' => 'Model Class',
-			'controller' => 'Controller ID',
-			'baseControllerClass' => 'Base Controller Class',
 			'generateComponents' => 'Generate Components and Widgets',
 			'generateLayouts' => 'Generate Layouts',
 			'layoutPrefix' => 'Layout Prefix',
